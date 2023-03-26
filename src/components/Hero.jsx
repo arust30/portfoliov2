@@ -4,11 +4,12 @@ import "./hero.css";
 function TerminalHero() {
   const [text, setText] = useState("");
   const [index, setIndex] = useState(0);
-  const code = [
-    "run portfolio_website.exe->Loading scripts...->Loading styles...->Loading junk...->Finished!",
-  ];
 
   useEffect(() => {
+    const code = [
+      "run portfolio_website.exe->Loading scripts...->Loading styles...->Loading junk...->Finished!",
+    ];
+
     const interval = setInterval(() => {
       if (index < code.length) {
         const charToAdd = code[index][text.length];
@@ -19,7 +20,7 @@ function TerminalHero() {
           setText((text) => text + charToAdd);
         }
 
-        if (text.length === code[index].length) {
+        if (text.length === code[index].length || charToAdd === "!") {
           setIndex((index) => index + 1);
         }
       } else {
@@ -28,7 +29,7 @@ function TerminalHero() {
     }, 50);
 
     return () => clearInterval(interval);
-  }, [code, index, text]);
+  }, [index, text]);
 
   return (
     <div className="bg-gray-900 text-green-400 py-16 px-8 flex justify-center items-center">
